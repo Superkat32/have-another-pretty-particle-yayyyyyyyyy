@@ -1,4 +1,4 @@
-package net.superkat.happy.particle;
+package net.superkat.happy.particle.defaults;
 
 import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.client.particle.SpriteBillboardParticle;

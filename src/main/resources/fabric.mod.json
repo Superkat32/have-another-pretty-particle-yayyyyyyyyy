@@ -3,13 +3,12 @@
 	"id": "happy",
 	"version": "${version}",
 	"name": "Have Another Pretty Particle. Yayyyyyyyyy",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "A collection of custom-made particles for use at BlanketCon 2025!",
 	"authors": [
 		"Superkat32"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/Superkat32/have-another-pretty-particle-yayyyyyyyyy"
 	},
 	"license": "MIT",
 	"icon": "assets/happy/icon.png",

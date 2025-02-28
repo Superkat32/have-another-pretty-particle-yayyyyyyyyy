@@ -9,6 +9,7 @@ import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.MathHelper;
+import net.superkat.happy.particle.defaults.AbstractColorfulParticle;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;

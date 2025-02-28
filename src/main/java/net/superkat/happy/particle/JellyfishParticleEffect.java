@@ -9,6 +9,7 @@ import net.minecraft.particle.ParticleType;
 import net.minecraft.util.dynamic.Codecs;
 import net.superkat.happy.ColorUtil;
 import net.superkat.happy.HappyParticles;
+import net.superkat.happy.particle.defaults.AbstractScalableParticleEffect;
 import org.joml.Vector3f;
 
 import java.awt.*;
