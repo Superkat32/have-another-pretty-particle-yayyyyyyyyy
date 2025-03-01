@@ -47,5 +47,5 @@ happy:cloud
 ### Colored Presets:
 #### Pink sparkle(ID could change!):
 ```Particle ID
-happy:sparkle
+happy:pink_sparkle
 ```
