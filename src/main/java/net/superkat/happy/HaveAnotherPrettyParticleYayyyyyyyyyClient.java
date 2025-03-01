@@ -13,9 +13,7 @@ public class HaveAnotherPrettyParticleYayyyyyyyyyClient implements ClientModInit
         ParticleFactoryRegistry.getInstance().register(HappyParticles.PINK_SPARKLE, SparkleParticle.SimpleFactory::new);
 
         ParticleFactoryRegistry.getInstance().register(HappyParticles.JELLYFISH_PARTICLE, JellyfishParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(HappyParticles.JELLYFISH_PARTICLE_SIMPLE, JellyfishParticle.SimpleFactory::new);
 
         ParticleFactoryRegistry.getInstance().register(HappyParticles.CLOUD_PARTICLE, CloudParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(HappyParticles.CLOUD_PARTICLE_SIMPLE, CloudParticle.SimpleFactory::new);
     }
 }

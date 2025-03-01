@@ -3,10 +3,29 @@
 
 Yippee particles!
 
+# Particle How-To's
+Various how-to's for vanilla particle commands.
+### Custom Parameters
+Add a `{<param name>:<param value>}` after the particle id.  
+Example with param. name of `max_age` with an integer of `50`.
+```Particle Command
+/particle happy:jellyfish{max_age:50} ~ ~1 ~
+```
+
+Floats can be specified with a decimal point added(e.g. `1.0` or `1.56`).
+
+#### Vector3f Paremeter
+Vector3f parameters can be added with the value of `[<0f-1f>, <0f-1f>, <0f-1f>]`
+Example with param. name of `velocity_after_hit` with a value of `[0.2, 0.3, 0.6]`.
+```Particle Command
+/particle happy:cloud{velocity_after_hit:[0.2, 0.3, 0.6]} ~ ~1 ~
+```
+
 # Particle Docs:
 ## Jellyfish
-Simple: `happy:jellyfish_simple`  
-Configurable: `happy:jellyfish`
+```Particle ID
+happy:jellyfish
+```
 - `scale` (float): Determines the size of the particle.
 - `max_age` (int): Determines the max amount of ticks the particle will last.
 - `bounces` (int): Determines the amount of bounces the jellyfish will preform throughout its max age. This affects the animation speed, and distance traveled.
@@ -14,8 +33,9 @@ Configurable: `happy:jellyfish`
 - `end_color` (Vector3f): The end color of a 2 color transition.
 
 ## Cloud
-Simple: `happy:cloud_simple`  
-Configurable: `happy:cloud`
+```Particle ID
+happy:cloud
+```
 - `scale` (float): Determines the size of the particle.
 - `max_age` (int): Determines the max amount of ticks the particle will last.
 - `max_age_random` (int): The max number of extra ticks the particle may last. A random number from 0 to this number will be picked and added to the max age.
@@ -25,4 +45,7 @@ Configurable: `happy:cloud`
 
 ## Sparkle(WIP)
 ### Colored Presets:
-Pink: `happy:sparkle`
+#### Pink sparkle(ID could change!):
+```Particle ID
+happy:sparkle
+```

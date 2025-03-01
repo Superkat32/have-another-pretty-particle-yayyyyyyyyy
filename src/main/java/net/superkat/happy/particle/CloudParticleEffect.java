@@ -12,21 +12,15 @@ import net.superkat.happy.particle.defaults.AbstractScalableParticleEffect;
 import org.joml.Vector3f;
 
 public class CloudParticleEffect extends AbstractScalableParticleEffect {
-    public static final float DEFAULT_SCALE = 3f;
-    public static final int DEFAULT_MAX_AGE = 280;
-    public static final int DEFAULT_MAX_AGE_RANDOM = 50;
-    public static final int DEFAULT_HITS_UNTIL_FADE = 1;
-    public static final float DEFAULT_FADE_AMOUNT = 0.1f;
-    public static final Vector3f DEFAULT_VELOCITY_AFTER_HIT = new Vector3f();
 
     public static final MapCodec<CloudParticleEffect> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                    SCALE_CODEC.optionalFieldOf("scale", DEFAULT_SCALE).forGetter(effect -> effect.scale),
-                    Codecs.POSITIVE_INT.optionalFieldOf("max_age", DEFAULT_MAX_AGE).forGetter(effect -> effect.maxAge),
-                    Codecs.POSITIVE_INT.optionalFieldOf("max_age_random", DEFAULT_MAX_AGE_RANDOM).forGetter(effect -> effect.maxAgeRandom),
-                    Codecs.POSITIVE_INT.optionalFieldOf("hits_until_fade", DEFAULT_HITS_UNTIL_FADE).forGetter(effect -> effect.hitsUntilFade),
-                    Codecs.POSITIVE_FLOAT.optionalFieldOf("fade_amount", DEFAULT_FADE_AMOUNT).forGetter(effect -> effect.fadeAmount),
-                    Codecs.VECTOR_3F.optionalFieldOf("velocity_after_hit", DEFAULT_VELOCITY_AFTER_HIT).forGetter(effect -> effect.velocityAfterHit)
+                    SCALE_CODEC.optionalFieldOf("scale", CloudParticle.DEFAULT_SCALE).forGetter(effect -> effect.scale),
+                    Codecs.POSITIVE_INT.optionalFieldOf("max_age", CloudParticle.DEFAULT_MAX_AGE).forGetter(effect -> effect.maxAge),
+                    Codecs.POSITIVE_INT.optionalFieldOf("max_age_random", CloudParticle.DEFAULT_MAX_AGE_RANDOM).forGetter(effect -> effect.maxAgeRandom),
+                    Codecs.POSITIVE_INT.optionalFieldOf("hits_until_fade", CloudParticle.DEFAULT_HITS_UNTIL_FADE).forGetter(effect -> effect.hitsUntilFade),
+                    Codecs.POSITIVE_FLOAT.optionalFieldOf("fade_amount", CloudParticle.DEFAULT_FADE_AMOUNT).forGetter(effect -> effect.fadeAmount),
+                    Codecs.VECTOR_3F.optionalFieldOf("velocity_after_hit", CloudParticle.DEFAULT_VELOCITY_AFTER_HIT).forGetter(effect -> effect.velocityAfterHit)
             ).apply(instance, CloudParticleEffect::new)
     );
 
