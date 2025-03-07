@@ -1,7 +1,9 @@
 # Have Another Pretty Particle. Yayyyyyyyy!!!
 ## A collection of custom-made particles for use at BlanketCon 2025!
 
-Yippee particles!
+Yippee particles!* Current particles include a colorable jellyfish, simple clouds which disappear upon hitting a block, and a WIP sparkle particle!
+
+*Yippee creature not included (for now).
 
 # Particle How-To's
 Various how-to's for vanilla particle commands.
