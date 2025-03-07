@@ -5,7 +5,6 @@ import net.minecraft.particle.ParticleEffect;
 
 public abstract class AbstractScalableParticleEffect implements ParticleEffect {
 
-    //stolen from AbstractDustParticleEffect
     protected static final Codec<Float> SCALE_CODEC = Codec.FLOAT;
 
     protected final float scale;

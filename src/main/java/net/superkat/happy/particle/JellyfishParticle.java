@@ -16,12 +16,6 @@ import org.joml.Vector3f;
 import java.awt.*;
 
 public class JellyfishParticle extends AbstractColorfulParticle {
-    public static final float DEFAULT_SCALE = 0.5f;
-    public static final int DEFAULT_MAX_AGE = 60;
-    public static final int DEFAULT_BOUNCES = 3;
-    public static final Vector3f DEFAULT_START = ColorUtil.colorToVector(Color.WHITE);
-    public static final Vector3f DEFAULT_END = ColorUtil.colorToVector(new Color(195, 86, 234));
-
     public int bounces;
     public float maxScale;
     public int bounceTicks;
@@ -43,17 +37,48 @@ public class JellyfishParticle extends AbstractColorfulParticle {
         this.maxBounceTicks = this.maxAge / this.bounces;
         this.maxAnimAge = this.maxBounceTicks + (this.maxAge / this.maxBounceTicks);
 
-        if(params.isRandomColors()) {
-            int rgbIncrease = random.nextBetween(1, 3);
-            int red = rgbIncrease == 1 ? random.nextBetween(150, 255) : 255;
-            int green = rgbIncrease == 2 ? random.nextBetween(150, 255) : 255;
-            int blue = rgbIncrease == 3 ? random.nextBetween(150, 255) : 255;
-            this.setColorFromColor(new Color(red, green, blue));
+        Vector3f startColor = params.getStartColor();
+        Vector3f endColor = params.getEndColor();
+        boolean defaultStart = startColor == JellyfishParticleEffect.DEFAULT_START;
+        boolean defaultEnd = endColor == JellyfishParticleEffect.DEFAULT_END;
+        boolean defaultColors = defaultStart && defaultEnd;
+        if(params.isRandomColor()) {
+            Color color = defaultColors ? randomColor() : randomColor(startColor, endColor);
+            this.setColorFromColor(color);
+        } else if (params.isTransitionRandomColor()) {
+            Color color1 = defaultColors ? randomColor() : randomColor(startColor, endColor);
+            Color color2 = defaultColors ? randomColor() : randomColor(startColor, endColor);
+            startColor = ColorUtil.colorToVector(color1);
+            endColor = ColorUtil.colorToVector(color2);
+            this.setTransitionColors(startColor, endColor);
         } else {
-            this.setTransitionColors(params.getStartColor(), params.getEndColor());
+            this.setTransitionColors(startColor, endColor);
         }
 
         this.setSpriteForAge(this.spriteProvider);
+    }
+
+    private Color randomColor(Vector3f start, Vector3f end) {
+        float redMin = Math.min(start.x, end.x);
+        float greenMin = Math.min(start.y, end.y);
+        float blueMin = Math.min(start.z, end.z);
+        float redMax = Math.max(start.x, end.x);
+        float greenMax = Math.max(start.y, end.y);
+        float blueMax = Math.max(start.z, end.z);
+
+        float red = MathHelper.nextFloat(this.random, redMin, redMax);
+        float green = MathHelper.nextFloat(this.random, greenMin, greenMax);
+        float blue = MathHelper.nextFloat(this.random, blueMin, blueMax);
+        return new Color(red, green, blue);
+    }
+
+    private Color randomColor() {
+        //random decent color
+        int rgbIncrease = random.nextBetween(1, 3);
+        int red = rgbIncrease == 1 ? random.nextBetween(150, 255) : 255;
+        int green = rgbIncrease == 2 ? random.nextBetween(150, 255) : 255;
+        int blue = rgbIncrease == 3 ? random.nextBetween(150, 255) : 255;
+        return new Color(red, green, blue);
     }
 
     @Override

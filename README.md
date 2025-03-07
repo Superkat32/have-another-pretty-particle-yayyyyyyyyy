@@ -12,16 +12,28 @@ Example with param. name of `max_age` with an integer of `50`.
 /particle happy:jellyfish{max_age:50} ~ ~1 ~
 ```
 
-Floats can be specified with a decimal point added(e.g. `1.0` or `1.56`).
+For multiple parameters, add a comma between each parameter.  
+Example with an extra param. name of `scale` with a float value of `5.0f`
+```Particle Command
+/particle happy:jellyfish{max_age:50, scale:5.0f} ~ ~1 ~
+```
+
+Floats can be specified with a decimal point added(e.g. `1.0` or `1.56`), or an "f' added (e.g. `1f`, `1.56f`).
 
 #### Vector3f Paremeter
-Vector3f parameters can be added with the value of `[<0f-1f>, <0f-1f>, <0f-1f>]`
-Example with param. name of `velocity_after_hit` with a value of `[0.2, 0.3, 0.6]`.
+Vector3f parameters can be added with the value of `[<float>, <float>, <float>]`
+Example with param. name of `velocity_after_hit` with a value of `[0.2, 0.3, 0.6]`.  
+
 ```Particle Command
 /particle happy:cloud{velocity_after_hit:[0.2, 0.3, 0.6]} ~ ~1 ~
 ```
+**For colors using Vector3f's, it is expected that the values are between 0f and 1f.**
 
 # Particle Docs:
+
+Unless specified otherwise, all parameters can be assumed to be optional, using a default value if not added.  
+_Note: This only applies to HAPPY's particles. Minecraft's particles almost always require their parameters to be given._
+
 ## Jellyfish
 ```Particle ID
 happy:jellyfish
@@ -29,8 +41,12 @@ happy:jellyfish
 - `scale` (float): Determines the size of the particle.
 - `max_age` (int): Determines the max amount of ticks the particle will last.
 - `bounces` (int): Determines the amount of bounces the jellyfish will preform throughout its max age. This affects the animation speed, and distance traveled.
-- `start_color` (Vector3f): If given, the start color of a 2 color transition. If not given, a single random color is chosen, and no transition happens.
-- `end_color` (Vector3f): The end color of a 2 color transition.
+- `color_mode` (int): ID of how to handle the start/end colors.
+  - 0: Default - Transitions between 2 colors, as given from the start/end colors.
+  - 1: Random color - If start/end colors are left as default, a random color from a preset list(mostly pastel colors) is chosen. If not default, the start/end colors are used as a range of where to pick the random color(e.g. white through black will choose any random color).
+  - 2: Random transition colors - If start/end colors are left as default, 2 random colors from a preset list(mostly pastel colors) will be chosen as the transition colors. If not default, the start/end colors are used as a range of where to pick the random colors.
+- `start_color` (Vector3f): The start color of a 2 color transition (Note: usage changes based on color mode - see above).
+- `end_color` (Vector3f): The end color of a 2 color transition (Note: usage changes based on color mode - see above).
 
 ## Cloud
 ```Particle ID

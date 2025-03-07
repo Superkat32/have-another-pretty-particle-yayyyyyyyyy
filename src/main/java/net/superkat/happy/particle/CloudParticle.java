@@ -17,13 +17,6 @@ import org.joml.Vector3f;
 import java.util.List;
 
 public class CloudParticle extends SpriteBillboardParticle {
-    public static final float DEFAULT_SCALE = 3f;
-    public static final int DEFAULT_MAX_AGE = 280;
-    public static final int DEFAULT_MAX_AGE_RANDOM = 50;
-    public static final int DEFAULT_HITS_UNTIL_FADE = 1;
-    public static final float DEFAULT_FADE_AMOUNT = 0.1f;
-    public static final Vector3f DEFAULT_VELOCITY_AFTER_HIT = new Vector3f();
-
     private static final double MAX_SQUARED_COLLISION_CHECK_DISTANCE = MathHelper.square(100.0);
 
     private boolean stopped = false;
