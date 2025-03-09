@@ -14,7 +14,7 @@ public class HappyParticles {
 
     public static final ParticleType<JellyfishParticleEffect> JELLYFISH_PARTICLE = FabricParticleTypes.complex(JellyfishParticleEffect.CODEC, JellyfishParticleEffect.PACKET_CODEC);
 
-    public static final ParticleType<CloudParticleEffect> CLOUD_PARTICLE = FabricParticleTypes.complex(CloudParticleEffect.CODEC, CloudParticleEffect.PACKET_CODEC);
+    public static final ParticleType<CloudParticleEffect> CLOUD_PARTICLE = FabricParticleTypes.complex(true, CloudParticleEffect.CODEC, CloudParticleEffect.PACKET_CODEC);
 
     public static final SimpleParticleType PINK_SPARKLE = FabricParticleTypes.simple();
 

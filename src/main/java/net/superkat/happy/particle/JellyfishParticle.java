@@ -25,9 +25,15 @@ public class JellyfishParticle extends AbstractColorfulParticle {
     public JellyfishParticle(ClientWorld world, double x, double y, double z, double velX, double velY, double velZ, JellyfishParticleEffect params, SpriteProvider spriteProvider) {
         super(world, x, y, z, velX, velY, velZ, spriteProvider);
 
-        this.velocityX /= 2f;
-        this.velocityY = 0.115f;
-        this.velocityZ /= 2f;
+        if(velX == 0 && velY == 0 && velZ == 0) {
+            this.velocityX /= 2f;
+            this.velocityY = 0.115f;
+            this.velocityZ /= 2f;
+        } else {
+            this.velocityX = velX;
+            this.velocityY = velY;
+            this.velocityZ = velZ;
+        }
         this.velocityMultiplier = 0.99f;
         this.maxAge = params.getMaxAge();
         this.bounces = params.getBounces();

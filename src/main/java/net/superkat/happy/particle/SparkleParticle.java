@@ -54,10 +54,10 @@ public class SparkleParticle extends SpriteBillboardParticle {
                 sizeDelta = 1f - (delta * 2f);
             } else {
                 sizeDelta = (delta - 0.5f) * 2f;
-                angleIncrease = -0.7f;
+                angleIncrease = -0.05f;
             }
         } else if(stage == 4) {
-            sizeDelta = easeOutBack(1f - delta);
+            sizeDelta = 1f - delta;
         }
 
         this.scale = this.maxScale * sizeDelta;
