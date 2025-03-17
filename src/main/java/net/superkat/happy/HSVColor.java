@@ -18,6 +18,53 @@ public record HSVColor(float hue, float saturation, float value) implements IntS
         return new HSVColor((hue + hueDelta) % 360.0f, clampToOne(saturation + satDelta), clampToOne(value + valueDelta));
     }
 
+    public static HSVColor fromRgb(int rgb) {
+        int r = (rgb >> 16) & 0xFF;
+        int g = (rgb >> 8) & 0xFF;
+        int b = rgb & 0xFF;
+        return fromRgb(r, g, b);
+    }
+
+    public static HSVColor fromRgb(int r, int g, int b) {
+        float rp = r / 255.0f;
+        float gp = g / 255.0f;
+        float bp = b / 255.0f;
+        
+        float cmax = Math.max(rp, Math.max(gp, bp));
+        float cmin = Math.min(rp, Math.min(gp, bp));
+        float delta = cmax - cmin;
+        
+        float hue = 0f;
+        
+        float epsilon = 0.0001f; // tolerance for floating point comparisons
+        if (delta < epsilon) { // delta == 0
+            hue = 0f;
+        } else if (Math.abs(cmax - rp) < epsilon) { // cmax == r
+            hue = (gp - bp) / delta;
+            hue %= 6f;
+            hue *= 60f;
+        } else if (Math.abs(cmax - gp) < epsilon) { // cmax == g
+            hue = (bp - rp) / delta;
+            hue += 2f;
+            hue *= 60f;
+        } else if (Math.abs(cmax - bp) < epsilon) { // cmax == b
+            hue = (rp - gp) / delta;
+            hue += 4f;
+            hue *= 60f;
+        } else {
+            hue = 0f; // Never happens - cmax is always one of (r, g, b)
+        }
+        
+        float sat = 0f;
+        if (cmax != 0) { // equals is fine here; it's just to avoid divide-by-zero
+            sat = delta / cmax;
+        }
+        
+        float val = cmax;
+        
+        return new HSVColor(hue, sat, val);
+    }
+
     public int getTranslucent(float opacity) {
         int base = getAsInt() & 0xFFFFFF;
         int a = ((int) opacity * 255) & 0xFF;
