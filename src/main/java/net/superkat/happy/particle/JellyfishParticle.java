@@ -8,12 +8,9 @@ import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.MathHelper;
-import net.superkat.happy.ColorUtil;
 import net.superkat.happy.particle.defaults.AbstractColorfulParticle;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
-
-import java.awt.*;
 
 public class JellyfishParticle extends AbstractColorfulParticle {
     public int bounces;
@@ -49,13 +46,13 @@ public class JellyfishParticle extends AbstractColorfulParticle {
         boolean defaultEnd = endColor == JellyfishParticleEffect.DEFAULT_END;
         boolean defaultColors = defaultStart && defaultEnd;
         if(params.isRandomColor()) {
-            Color color = defaultColors ? randomColor() : randomColor(startColor, endColor);
+            Vector3f color = defaultColors ? randomColor() : randomColor(startColor, endColor);
             this.setColorFromColor(color);
         } else if (params.isTransitionRandomColor()) {
-            Color color1 = defaultColors ? randomColor() : randomColor(startColor, endColor);
-            Color color2 = defaultColors ? randomColor() : randomColor(startColor, endColor);
-            startColor = ColorUtil.colorToVector(color1);
-            endColor = ColorUtil.colorToVector(color2);
+            Vector3f color1 = defaultColors ? randomColor() : randomColor(startColor, endColor);
+            Vector3f color2 = defaultColors ? randomColor() : randomColor(startColor, endColor);
+            startColor = color1;
+            endColor = color2;
             this.setTransitionColors(startColor, endColor);
         } else {
             this.setTransitionColors(startColor, endColor);
@@ -64,7 +61,7 @@ public class JellyfishParticle extends AbstractColorfulParticle {
         this.setSpriteForAge(this.spriteProvider);
     }
 
-    private Color randomColor(Vector3f start, Vector3f end) {
+    private Vector3f randomColor(Vector3f start, Vector3f end) {
         float redMin = Math.min(start.x, end.x);
         float greenMin = Math.min(start.y, end.y);
         float blueMin = Math.min(start.z, end.z);
@@ -75,16 +72,16 @@ public class JellyfishParticle extends AbstractColorfulParticle {
         float red = MathHelper.nextFloat(this.random, redMin, redMax);
         float green = MathHelper.nextFloat(this.random, greenMin, greenMax);
         float blue = MathHelper.nextFloat(this.random, blueMin, blueMax);
-        return new Color(red, green, blue);
+        return new Vector3f(red, green, blue);
     }
 
-    private Color randomColor() {
+    private Vector3f randomColor() {
         //random decent color
         int rgbIncrease = random.nextBetween(1, 3);
         int red = rgbIncrease == 1 ? random.nextBetween(150, 255) : 255;
         int green = rgbIncrease == 2 ? random.nextBetween(150, 255) : 255;
         int blue = rgbIncrease == 3 ? random.nextBetween(150, 255) : 255;
-        return new Color(red, green, blue);
+        return new Vector3f(red / 255f, green / 255f, blue / 255f);
     }
 
     @Override

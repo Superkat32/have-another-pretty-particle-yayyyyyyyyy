@@ -8,12 +8,9 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.particle.ParticleType;
 import net.minecraft.util.dynamic.Codecs;
-import net.superkat.happy.ColorUtil;
 import net.superkat.happy.HappyParticles;
 import net.superkat.happy.particle.defaults.AbstractScalableParticleEffect;
 import org.joml.Vector3f;
-
-import java.awt.*;
 
 public class JellyfishParticleEffect extends AbstractScalableParticleEffect {
     public static final float DEFAULT_SCALE = 0.5f;
@@ -21,8 +18,8 @@ public class JellyfishParticleEffect extends AbstractScalableParticleEffect {
     public static final int DEFAULT_BOUNCES = 3;
     public static final int DEFAULT_COLOR_MODE_INDEX = JellyfishColorMode.DEFAULT.getIndex();
 
-    public static final Vector3f DEFAULT_START = ColorUtil.colorToVector(Color.WHITE);
-    public static final Vector3f DEFAULT_END = ColorUtil.colorToVector(new Color(195, 86, 234));
+    public static final Vector3f DEFAULT_START = new Vector3f(1.0f, 1.0f, 1.0f);
+    public static final Vector3f DEFAULT_END = new Vector3f(195 / 255.0f, 86 / 255.0f, 234 / 255.0f);
 
     public static final MapCodec<JellyfishParticleEffect> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(

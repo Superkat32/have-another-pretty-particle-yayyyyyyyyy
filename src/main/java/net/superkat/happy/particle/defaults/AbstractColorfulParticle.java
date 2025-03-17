@@ -8,8 +8,6 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
 import org.joml.Vector3f;
 
-import java.awt.*;
-
 public abstract class AbstractColorfulParticle extends SpriteBillboardParticle {
     protected final SpriteProvider spriteProvider;
 
@@ -23,11 +21,8 @@ public abstract class AbstractColorfulParticle extends SpriteBillboardParticle {
 //        this.setSpriteForAge(this.spriteProvider);
     }
 
-    /**
-     * Allows you to use Java's Color class, which in turn has its own color picker/viewer in IntelliJ
-     */
-    public void setColorFromColor(Color color) {
-        this.setColor(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f);
+    public void setColorFromColor(Vector3f color) {
+        this.setColor(color.x, color.y, color.z);
     }
 
     public void setTransitionColors(Vector3f start, Vector3f end) {

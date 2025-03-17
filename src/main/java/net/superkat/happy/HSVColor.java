@@ -2,6 +2,8 @@ package net.superkat.happy;
 
 import java.util.function.IntSupplier;
 
+import org.joml.Vector3f;
+
 /**
  * Represents opaque colors based on HSV. These colors are in gamma (sRGB) space.
  */
@@ -22,16 +24,17 @@ public record HSVColor(float hue, float saturation, float value) implements IntS
         int r = (rgb >> 16) & 0xFF;
         int g = (rgb >> 8) & 0xFF;
         int b = rgb & 0xFF;
-        return fromRgb(r, g, b);
+        return fromIntRgb(r, g, b);
+    }
+    
+    public static HSVColor fromIntRgb(int r, int g, int b) {
+        return fromFloatRgb(r / 255.0f, g / 255.0f, g / 255.0f);
     }
 
-    public static HSVColor fromRgb(int r, int g, int b) {
-        float rp = r / 255.0f;
-        float gp = g / 255.0f;
-        float bp = b / 255.0f;
+    public static HSVColor fromFloatRgb(float r, float g, float b) {
         
-        float cmax = Math.max(rp, Math.max(gp, bp));
-        float cmin = Math.min(rp, Math.min(gp, bp));
+        float cmax = Math.max(r, Math.max(g, b));
+        float cmin = Math.min(r, Math.min(g, b));
         float delta = cmax - cmin;
         
         float hue = 0f;
@@ -39,16 +42,16 @@ public record HSVColor(float hue, float saturation, float value) implements IntS
         float epsilon = 0.0001f; // tolerance for floating point comparisons
         if (delta < epsilon) { // delta == 0
             hue = 0f;
-        } else if (Math.abs(cmax - rp) < epsilon) { // cmax == r
-            hue = (gp - bp) / delta;
+        } else if (Math.abs(cmax - r) < epsilon) { // cmax == r
+            hue = (g - b) / delta;
             hue %= 6f;
             hue *= 60f;
-        } else if (Math.abs(cmax - gp) < epsilon) { // cmax == g
-            hue = (bp - rp) / delta;
+        } else if (Math.abs(cmax - g) < epsilon) { // cmax == g
+            hue = (b - r) / delta;
             hue += 2f;
             hue *= 60f;
-        } else if (Math.abs(cmax - bp) < epsilon) { // cmax == b
-            hue = (rp - gp) / delta;
+        } else if (Math.abs(cmax - b) < epsilon) { // cmax == b
+            hue = (r - g) / delta;
             hue += 4f;
             hue *= 60f;
         } else {
@@ -63,6 +66,10 @@ public record HSVColor(float hue, float saturation, float value) implements IntS
         float val = cmax;
         
         return new HSVColor(hue, sat, val);
+    }
+    
+    public static HSVColor fromRgb(Vector3f vec) {
+        return fromFloatRgb(vec.x, vec.y, vec.z);
     }
 
     public int getTranslucent(float opacity) {
