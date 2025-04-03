@@ -1,9 +1,5 @@
 package net.superkat.happy.particle;
 
-import java.util.List;
-
-import org.jetbrains.annotations.Nullable;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.FabricSpriteProvider;
@@ -14,19 +10,29 @@ import net.minecraft.client.particle.SpriteBillboardParticle;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.random.Random;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class BubbleParticle extends SpriteBillboardParticle {
     private final SpriteProvider spriteProvider;
 
-    public BubbleParticle(ClientWorld clientWorld, double x, double y, double z, double velX, double velY, double velZ, SpriteProvider provider) {
+    public BubbleParticle(ClientWorld clientWorld, double x, double y, double z, double velX, double velY, double velZ, BubbleParticleEffect params, SpriteProvider provider) {
         super(clientWorld, x, y, z, velX, velY, velZ);
         this.spriteProvider = provider;
         this.setInitialSprite(clientWorld.getRandom(), provider);
 
-        this.maxAge = 60;
-        this.scale = (float) Math.abs(clientWorld.getRandom().nextTriangular(0, 1));
+        this.maxAge = params.maxAge();
+        if(params.maxAgeRandom() > 0) {
+            this.maxAge += this.random.nextInt(params.maxAgeRandom());
+        }
+
+        if(params.scale() == 0f) {
+            this.scale = (float) Math.abs(clientWorld.getRandom().nextTriangular(0, 1));
+        } else {
+            this.scale = params.scale();
+        }
     }
 
     @Override
@@ -66,7 +72,7 @@ public class BubbleParticle extends SpriteBillboardParticle {
     }
 
     @Environment(EnvType.CLIENT)
-    public static class Factory implements ParticleFactory<SimpleParticleType> {
+    public static class Factory implements ParticleFactory<BubbleParticleEffect> {
         private final SpriteProvider spriteProvider;
 
         public Factory(SpriteProvider spriteProvider) {
@@ -74,8 +80,8 @@ public class BubbleParticle extends SpriteBillboardParticle {
         }
 
         @Override
-        public @Nullable Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new BubbleParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
+        public @Nullable Particle createParticle(BubbleParticleEffect parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+            return new BubbleParticle(world, x, y, z, velocityX, velocityY, velocityZ, parameters, this.spriteProvider);
         }
     }
 }

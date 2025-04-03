@@ -61,6 +61,14 @@ happy:cloud
 - `fade_amount` (float): The amount of alpha/opacity to remove each tick while fading out. **Alpha is between 0 and 1**, meaning that uses "0" will result in no fade out, and "1" will result in instant fadeout.
 - `velocity_after_hit` (Vector3f): The amount of velocity to add after the particles comes in contact with a block. Note: This velocity is added after EVERY block hit, not just once!
 
+## Bubble
+```Particle ID
+happy:bubble
+```
+- `scale` (float): If added, sets the size of the particle. If not added, a random triangular with mode 0, deviation 1 is chosen.
+- `max_age` (int): Determines the max amount of ticks the particle will last.
+- `max_age_random` (int): The max number of extra ticks the particle may last, chosen randomly from 0 to that number.
+
 ## Sparkle(WIP)
 ### Colored Presets:
 #### Pink sparkle(ID could change!):
