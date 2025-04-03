@@ -18,11 +18,15 @@ public class HappyParticles {
 
     public static final SimpleParticleType PINK_SPARKLE = FabricParticleTypes.simple();
 
+    public static final SimpleParticleType BUBBLE_PARTICLE = FabricParticleTypes.simple();
+
     public static void register() {
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "pink_sparkle"), PINK_SPARKLE);
 
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "jellyfish"), JELLYFISH_PARTICLE);
 
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "cloud"), CLOUD_PARTICLE);
+
+        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "bubble"), BUBBLE_PARTICLE);
     }
 }
