@@ -22,7 +22,7 @@ public class JellyfishParticle extends AbstractColorfulParticle {
     public JellyfishParticle(ClientWorld world, double x, double y, double z, double velX, double velY, double velZ, JellyfishParticleEffect params, SpriteProvider spriteProvider) {
         super(world, x, y, z, velX, velY, velZ, spriteProvider);
 
-        if(velX == 0 && velY == 0 && velZ == 0) {
+        if (velX == 0 && velY == 0 && velZ == 0) {
             this.velocityX /= 2f;
             this.velocityY = 0.115f;
             this.velocityZ /= 2f;
@@ -45,7 +45,7 @@ public class JellyfishParticle extends AbstractColorfulParticle {
         boolean defaultStart = startColor == JellyfishParticleEffect.DEFAULT_START;
         boolean defaultEnd = endColor == JellyfishParticleEffect.DEFAULT_END;
         boolean defaultColors = defaultStart && defaultEnd;
-        if(params.isRandomColor()) {
+        if (params.isRandomColor()) {
             Vector3f color = defaultColors ? randomColor() : randomColor(startColor, endColor);
             this.setColorFromColor(color);
         } else if (params.isTransitionRandomColor()) {
@@ -61,47 +61,24 @@ public class JellyfishParticle extends AbstractColorfulParticle {
         this.setSpriteForAge(this.spriteProvider);
     }
 
-    private Vector3f randomColor(Vector3f start, Vector3f end) {
-        float redMin = Math.min(start.x, end.x);
-        float greenMin = Math.min(start.y, end.y);
-        float blueMin = Math.min(start.z, end.z);
-        float redMax = Math.max(start.x, end.x);
-        float greenMax = Math.max(start.y, end.y);
-        float blueMax = Math.max(start.z, end.z);
-
-        float red = MathHelper.nextFloat(this.random, redMin, redMax);
-        float green = MathHelper.nextFloat(this.random, greenMin, greenMax);
-        float blue = MathHelper.nextFloat(this.random, blueMin, blueMax);
-        return new Vector3f(red, green, blue);
-    }
-
-    private Vector3f randomColor() {
-        //random decent color
-        int rgbIncrease = random.nextBetween(1, 3);
-        int red = rgbIncrease == 1 ? random.nextBetween(150, 255) : 255;
-        int green = rgbIncrease == 2 ? random.nextBetween(150, 255) : 255;
-        int blue = rgbIncrease == 3 ? random.nextBetween(150, 255) : 255;
-        return new Vector3f(red / 255f, green / 255f, blue / 255f);
-    }
-
     @Override
     public void tick() {
         super.tick();
-        if(this.bounces <= 0 || this.scale <= 0f) {
+        if (this.bounces <= 0 || this.scale <= 0f) {
             this.markDead();
             return;
         }
         this.bounceTicks++;
 
-        if(this.bounceTicks == this.maxBounceTicks) {
+        if (this.bounceTicks == this.maxBounceTicks) {
             this.velocityY += 0.05f;
             this.bounceTicks = 0;
             this.bounces--;
-        } else if(this.bounceTicks == 7) {
+        } else if (this.bounceTicks == 7) {
             this.velocityY *= 0.96f;
         }
 
-        if(this.bounces == 1) {
+        if (this.bounces == 1) {
             this.scale = MathHelper.lerp((float) this.bounceTicks / this.maxBounceTicks, this.maxScale, 0f);
         }
         this.setSpriteForAge(this.spriteProvider);
@@ -117,7 +94,7 @@ public class JellyfishParticle extends AbstractColorfulParticle {
 
     @Override
     public int getBrightness(float tint) {
-        if(this.bounces > 1) return 15728880; //emissive
+        if (this.bounces > 1) return 15728880; //emissive
         else {
             float delta = bounces == 1 ? (float) this.bounceTicks / this.maxBounceTicks : 1f;
             int blockLight = MathHelper.lerp(delta, 15, 3);

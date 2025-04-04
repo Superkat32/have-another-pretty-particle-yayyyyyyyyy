@@ -1,8 +1,8 @@
 package net.superkat.happy;
 
-import java.util.function.IntSupplier;
-
 import org.joml.Vector3f;
+
+import java.util.function.IntSupplier;
 
 /**
  * Represents opaque colors based on HSV. These colors are in gamma (sRGB) space.
@@ -28,7 +28,7 @@ public record HSVColor(float hue, float saturation, float value) implements IntS
     }
     
     public static HSVColor fromIntRgb(int r, int g, int b) {
-        return fromFloatRgb(r / 255.0f, g / 255.0f, g / 255.0f);
+        return fromFloatRgb(r / 255.0f, g / 255.0f, b / 255.0f);
     }
 
     public static HSVColor fromFloatRgb(float r, float g, float b) {
@@ -70,6 +70,59 @@ public record HSVColor(float hue, float saturation, float value) implements IntS
     
     public static HSVColor fromRgb(Vector3f vec) {
         return fromFloatRgb(vec.x, vec.y, vec.z);
+    }
+
+    /**
+     * Stolen from Java AWT's Color class, which I'm not allowed to use - I have no clue what any of this does
+     */
+    public static Vector3f toRgb(HSVColor color) {
+        float hue = color.hue();
+        float saturation = color.saturation();
+        float brightness = color.value();
+        int r = 0, g = 0, b = 0;
+        if (saturation == 0) {
+            r = g = b = (int) (brightness * 255.0f + 0.5f);
+        } else {
+            float h = (hue - (float)Math.floor(hue)) * 6.0f;
+            float f = h - (float)java.lang.Math.floor(h);
+            float p = brightness * (1.0f - saturation);
+            float q = brightness * (1.0f - saturation * f);
+            float t = brightness * (1.0f - (saturation * (1.0f - f)));
+            switch ((int) h) {
+                case 0:
+                    r = (int) (brightness * 255.0f + 0.5f);
+                    g = (int) (t * 255.0f + 0.5f);
+                    b = (int) (p * 255.0f + 0.5f);
+                    break;
+                case 1:
+                    r = (int) (q * 255.0f + 0.5f);
+                    g = (int) (brightness * 255.0f + 0.5f);
+                    b = (int) (p * 255.0f + 0.5f);
+                    break;
+                case 2:
+                    r = (int) (p * 255.0f + 0.5f);
+                    g = (int) (brightness * 255.0f + 0.5f);
+                    b = (int) (t * 255.0f + 0.5f);
+                    break;
+                case 3:
+                    r = (int) (p * 255.0f + 0.5f);
+                    g = (int) (q * 255.0f + 0.5f);
+                    b = (int) (brightness * 255.0f + 0.5f);
+                    break;
+                case 4:
+                    r = (int) (t * 255.0f + 0.5f);
+                    g = (int) (p * 255.0f + 0.5f);
+                    b = (int) (brightness * 255.0f + 0.5f);
+                    break;
+                case 5:
+                    r = (int) (brightness * 255.0f + 0.5f);
+                    g = (int) (p * 255.0f + 0.5f);
+                    b = (int) (q * 255.0f + 0.5f);
+                    break;
+            }
+        }
+        return new Vector3f(r / 255f, g / 255f, b / 255f);
+//        return 0xff000000 | (r << 16) | (g << 8) | (b << 0);
     }
 
     public int getTranslucent(float opacity) {

@@ -33,7 +33,7 @@ public class CloudParticle extends SpriteBillboardParticle {
         this.setBoundingBoxSpacing(0.25F, 0.25F);
         this.alpha = 0.9f;
         this.maxAge = params.getMaxAge();
-        if(params.getMaxAgeRandom() > 0) {
+        if (params.getMaxAgeRandom() > 0) {
             this.maxAge += this.random.nextInt(params.getMaxAgeRandom());
         }
 
@@ -55,9 +55,9 @@ public class CloudParticle extends SpriteBillboardParticle {
 
         ticksSinceHit++;
 
-        if(fadingOut) {
+        if (fadingOut) {
             this.alpha -= fadeAmount;
-            if(this.alpha <= 0f) {
+            if (this.alpha <= 0f) {
                 markDead();
                 return;
             }
@@ -69,7 +69,7 @@ public class CloudParticle extends SpriteBillboardParticle {
             this.velocityY = this.velocityY - this.gravityStrength;
             this.move(this.velocityX, this.velocityY, this.velocityZ);
 
-            if(fadingOut) return;
+            if (fadingOut) return;
             if (this.age >= this.maxAge - 60 && this.alpha > 0.01F) {
                 this.alpha -= 0.015F;
             }
@@ -102,16 +102,16 @@ public class CloudParticle extends SpriteBillboardParticle {
 
         this.onGround = initVelY != dy && initVelY < 0.0;
         this.stopped = initVelX != dx || initVelZ != dz;
-        if(stopped && ticksSinceHit >= 10) {
+        if (stopped && ticksSinceHit >= 10) {
             ticksSinceHit = 0;
             hitsUntilFade--;
             this.velocityX += velocityAfterHit.x;
             this.velocityY += velocityAfterHit.y;
             this.velocityZ += velocityAfterHit.z;
-            if(hitsUntilFade <= 0) {
+            if (hitsUntilFade <= 0) {
                 fadingOut = true;
             }
-        };
+        }
     }
 
     @Override

@@ -24,11 +24,11 @@ public class BubbleParticle extends SpriteBillboardParticle {
         this.setInitialSprite(clientWorld.getRandom(), provider);
 
         this.maxAge = params.maxAge();
-        if(params.maxAgeRandom() > 0) {
+        if (params.maxAgeRandom() > 0) {
             this.maxAge += this.random.nextInt(params.maxAgeRandom());
         }
 
-        if(params.scale() == 0f) {
+        if (params.scale() == 0f) {
             this.scale = (float) Math.abs(clientWorld.getRandom().nextTriangular(0, 1));
         } else {
             this.scale = params.scale();
@@ -45,7 +45,7 @@ public class BubbleParticle extends SpriteBillboardParticle {
         if (spriteProvider instanceof FabricSpriteProvider fab) {
             List<Sprite> sprites = fab.getSprites();
             if (sprites.isEmpty()) return;
-            
+
             int spriteCount = fab.getSprites().size() - 1;
             int selected = clientRandom.nextBetweenExclusive(0, spriteCount);
             this.setSprite(sprites.get(selected));
@@ -58,9 +58,9 @@ public class BubbleParticle extends SpriteBillboardParticle {
             if (spriteProvider instanceof FabricSpriteProvider fab) {
                 List<Sprite> sprites = fab.getSprites();
                 if (sprites.isEmpty()) return;
-                
+
                 if (this.age >= this.maxAge - 2) {
-                    this.setSprite(sprites.get(sprites.size()-1));
+                    this.setSprite(sprites.get(sprites.size() - 1));
                 }
             }
         }

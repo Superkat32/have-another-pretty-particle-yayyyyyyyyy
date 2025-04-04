@@ -9,6 +9,7 @@ import net.minecraft.util.Identifier;
 import net.superkat.happy.particle.BubbleParticleEffect;
 import net.superkat.happy.particle.CloudParticleEffect;
 import net.superkat.happy.particle.JellyfishParticleEffect;
+import net.superkat.happy.particle.SnailParticleEffect;
 
 public class HappyParticles {
     public static final String MOD_ID = HaveAnotherPrettyParticleYayyyyyyyyy.MOD_ID;
@@ -18,6 +19,8 @@ public class HappyParticles {
     public static final ParticleType<CloudParticleEffect> CLOUD_PARTICLE = FabricParticleTypes.complex(true, CloudParticleEffect.CODEC, CloudParticleEffect.PACKET_CODEC);
 
     public static final ParticleType<BubbleParticleEffect> BUBBLE_PARTICLE = FabricParticleTypes.complex(BubbleParticleEffect.CODEC, BubbleParticleEffect.PACKET_CODEC);
+
+    public static final ParticleType<SnailParticleEffect> SNAIL_PARTICLE = FabricParticleTypes.complex(SnailParticleEffect.CODEC, SnailParticleEffect.PACKET_CODEC);
 
     public static final SimpleParticleType PINK_SPARKLE = FabricParticleTypes.simple();
 
@@ -29,5 +32,7 @@ public class HappyParticles {
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "cloud"), CLOUD_PARTICLE);
 
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "bubble"), BUBBLE_PARTICLE);
+
+        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "snail"), SNAIL_PARTICLE);
     }
 }

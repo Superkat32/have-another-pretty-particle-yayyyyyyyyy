@@ -47,8 +47,8 @@ happy:jellyfish
   - 0: Default - Transitions between 2 colors, as given from the start/end colors.
   - 1: Random color - If start/end colors are left as default, a random color from a preset list(mostly pastel colors) is chosen. If not default, the start/end colors are used as a range of where to pick the random color(e.g. white through black will choose any random color).
   - 2: Random transition colors - If start/end colors are left as default, 2 random colors from a preset list(mostly pastel colors) will be chosen as the transition colors. If not default, the start/end colors are used as a range of where to pick the random colors.
-- `start_color` (Vector3f): The start color of a 2 color transition (Note: usage changes based on color mode - see above).
-- `end_color` (Vector3f): The end color of a 2 color transition (Note: usage changes based on color mode - see above).
+- `start_color` (Vector3f): The start RGB color of a 2 color transition (Note: usage changes based on color mode - see above).
+- `end_color` (Vector3f): The end RGB color of a 2 color transition (Note: usage changes based on color mode - see above).
 
 ## Cloud
 ```Particle ID
@@ -65,9 +65,23 @@ happy:cloud
 ```Particle ID
 happy:bubble
 ```
-- `scale` (float): If added, sets the size of the particle. If not added, a random triangular with mode 0, deviation 1 is chosen.
+- `scale` (float): If added, sets the size of the particle. Otherwise, a random triangular with mode 0, deviation 1 is chosen.
 - `max_age` (int): Determines the max amount of ticks the particle will last.
 - `max_age_random` (int): The max number of extra ticks the particle may last, chosen randomly from 0 to that number.
+
+## Snail
+```Particle ID
+happy:snail
+```
+- `scale` (float): If added, sets the size of the particle. Otherwise, 0.15 + a small amount is chosen.
+- `max_age` (int): Determines the max amount of ticks the particle will last.
+- `gravity_strength` (float): The strength of gravity for the particle (A 20th of this value is subtracted from the Y velocity every tick)
+  - 
+- `speed` (float): The speed of the particle after landing on the ground. Set to "0" to not move and immediately start shrinking upon landing.
+- `min_color` (Vector3f): The min RGB color when choosing a random color between "min_color" and "max_color".
+- `max_color` (Vector3f): The max RGB color when choosing a random color between "min_color" and "max_color".
+  - If both `min_color` and `max_color` are not added, a random color(most of the time a nice blue, but sometimes a random saturated color) is chosen instead.
+  - It doesn't actually matter if `min_color` is greater than `max_color`.
 
 ## Sparkle(WIP)
 ### Colored Presets:
