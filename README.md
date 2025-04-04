@@ -76,7 +76,6 @@ happy:snail
 - `scale` (float): If added, sets the size of the particle. Otherwise, 0.15 + a small amount is chosen.
 - `max_age` (int): Determines the max amount of ticks the particle will last.
 - `gravity_strength` (float): The strength of gravity for the particle (A 20th of this value is subtracted from the Y velocity every tick)
-  - 
 - `speed` (float): The speed of the particle after landing on the ground. Set to "0" to not move and immediately start shrinking upon landing.
 - `min_color` (Vector3f): The min RGB color when choosing a random color between "min_color" and "max_color".
 - `max_color` (Vector3f): The max RGB color when choosing a random color between "min_color" and "max_color".
