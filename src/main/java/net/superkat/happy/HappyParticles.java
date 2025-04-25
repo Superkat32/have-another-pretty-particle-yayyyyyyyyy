@@ -8,6 +8,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.superkat.happy.particle.BubbleParticleEffect;
 import net.superkat.happy.particle.CloudParticleEffect;
+import net.superkat.happy.particle.ExplosiveParticleEffect;
 import net.superkat.happy.particle.JellyfishParticleEffect;
 import net.superkat.happy.particle.SnailParticleEffect;
 
@@ -24,6 +25,8 @@ public class HappyParticles {
 
     public static final SimpleParticleType PINK_SPARKLE = FabricParticleTypes.simple();
 
+    public static final ParticleType<ExplosiveParticleEffect> EXPLOSIVE_PARTICLE = FabricParticleTypes.complex(ExplosiveParticleEffect.CODEC, ExplosiveParticleEffect.PACKET_CODEC);
+
     public static void register() {
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "pink_sparkle"), PINK_SPARKLE);
 
@@ -34,5 +37,7 @@ public class HappyParticles {
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "bubble"), BUBBLE_PARTICLE);
 
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "snail"), SNAIL_PARTICLE);
+
+        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "explosive_particle"), EXPLOSIVE_PARTICLE);
     }
 }
